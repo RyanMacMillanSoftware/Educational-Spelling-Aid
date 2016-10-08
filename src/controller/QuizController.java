@@ -31,7 +31,7 @@ public class QuizController extends SceneController{
 	
 	@FXML
 	public void initialize(){
-		Tooltip tts = new Tooltip("Change TTS voice");
+		Tooltip tts = new Tooltip("Change the voice");
 		Tooltip repeat = new Tooltip("Say the word again");
 		Tooltip.install(voiceBtn,tts);
 		Tooltip.install(repeatBtn, repeat);
@@ -192,8 +192,8 @@ b	 * Gets text area input
 			outputLabel.setText("Level "+(int)objectParameters[0]);
 			outputLabel.setTextFill(Paint.valueOf("black"));
 			correctWordLabel.setText("Please spell the spoken words.\n"
-					+ "Feel free to replay the word anytime with the right side buttons.\n"
-					+ "You may also change the voice if you find it necessary.");
+					+ "Make the voice say the word again using the buttons in the bottom right.\n"
+					+ "Try changing the accent as well.");
 			break;
 		case "resetGame":
 			outputLabel.setText("Well done!");
@@ -216,7 +216,7 @@ b	 * Gets text area input
 		case "faultedWord":
 			outputLabel.setText("Try again!");
 			outputLabel.setTextFill(Paint.valueOf("#cf8f14"));
-			correctWordLabel.setText("Sorry, that wasn't quite right");
+			correctWordLabel.setText("Try spell it differently this time");
 			progress.setStyle("-fx-accent: #ffbf44;");
 			break;
 		case "lastChanceWord":
@@ -228,7 +228,7 @@ b	 * Gets text area input
 		case "failedWord":
 			outputLabel.setText("Incorrect");
 			outputLabel.setTextFill(Paint.valueOf("orangered"));
-			correctWordLabel.setText("The word was \""+objectParameters[0]+"\"");
+			correctWordLabel.setText("The word was \""+objectParameters[0]+"\"\nMake sure to practice this word so you get it right next time!");
 			progress.setStyle("-fx-accent: orangered;");
 			break;
 		case "setProgress":
@@ -240,7 +240,7 @@ b	 * Gets text area input
 		case "gameWin":
 			outputLabel.setText("You win!");
 			outputLabel.setTextFill(Paint.valueOf("#44a044"));
-			correctWordLabel.setText("You have achieved mastery in all levels.\nWell done.");
+			correctWordLabel.setText("You have beaten all levels and are now a master speller!\nWell done!");
 			progress.setStyle("-fx-accent: lightgreen;");
 			progress.setProgress(1);
 			wordTextArea.setDisable(true);

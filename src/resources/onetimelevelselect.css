@@ -1,6 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 .bluebackground {
-	-fx-background-color:#bbcef0;
+	-fx-background-color:#b2ffe5;
 }
 .scroll-pane > .scroll-bar > *{
 	-fx-background-color:#fff;
@@ -9,14 +9,13 @@
 	-fx-background-color:#bbcef0;
 }
 .button {
-	-fx-background-color:#eff3ff;
-	-fx-border-radius:5px;
+	-fx-background-color:#ffffb2;
 }
 .button:hover {
-	-fx-background-color:#dcefff;
+	-fx-background-color:#ffff99;
 }
 .button:pressed {
-	-fx-background-color:#77aaee;
+	-fx-background-color:#ffff7f;
 }
 .titled-pane > .title {
 	-fx-background-color:#eff3ff;
@@ -47,11 +46,11 @@
  	-fx-border-insets:0;
  }
  .combo-box {
-	-fx-background-color:#eff3ff;
+	-fx-background-color:#ffffb2;
 }
 .combo-box:hover {
-	-fx-background-color:#dcefff;
+	-fx-background-color:#ffff99;
 }
 .combo-box:pressed {
-	-fx-background-color:#ccdeff;
+	-fx-background-color:#ffff7f;
 }

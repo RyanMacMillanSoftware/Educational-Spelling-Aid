@@ -39,7 +39,7 @@ public class StatsController extends SceneController{
 	@FXML
 	public void initialize(){
 		barChartView.getYAxis().setLabel("Percentage");
-		statsSelection.getItems().addAll("Global statistics", "Session statistics");
+		statsSelection.getItems().addAll("All Time Scores", "Latest Scores");
 		statsSelection.getSelectionModel().select(1);
 		statsSelection.setEditable(false);
 		StatsController thisController = this;
@@ -47,9 +47,9 @@ public class StatsController extends SceneController{
 			SceneController sc = thisController;
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if(newValue.equals("Global statistics")){
+				if(newValue.equals("All Time Scores")){
 					application.update(new ModelUpdateEvent(sc, "requestGlobalStats"));
-				}else if(newValue.equals("Session statistics")){
+				}else if(newValue.equals("Latest Scores")){
 					application.update(new ModelUpdateEvent(sc, "requestSessionStats"));
 				}
 			}
@@ -72,7 +72,7 @@ public class StatsController extends SceneController{
 	public void clearStats(MouseEvent me){
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Are you sure?");
-        alert.setContentText("Your stats will be cleared! You can't undo this change.");
+        alert.setContentText("Your scores will be lost forever!");
         Optional<ButtonType> response = alert.showAndWait();
         if(response.get()==ButtonType.OK){
         	application.update(new ModelUpdateEvent(this, "clearStats"));
@@ -135,7 +135,7 @@ public class StatsController extends SceneController{
 					sb.append("Faulted: "+faulted+"\n");
 					sb.append("Mastery: "+Math.round(mastered/(double)(mastered+failed+faulted)*100)+"%\n\n");
 				}
-				if(sb.length()==0){return "No stats to display :(\nGo and do some quizzes";}
+				if(sb.length()==0){return "No stats to display.\nTry play a new game.";}
 				return sb.toString();
 			}
 			public void succeeded(){
