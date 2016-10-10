@@ -9,7 +9,6 @@ import java.net.URISyntaxException;
 public final class ApplicationUtility {
 	public static int evaluateMaxLevelInFile(){
 		try{
-			//File path = new File(ApplicationUtility.class.getProtectionDomain().getCodeSource().getLocation().toURI());
 			File file = new File(Game.wordListFileName);
 			if(!file.exists()){
 				return 0;

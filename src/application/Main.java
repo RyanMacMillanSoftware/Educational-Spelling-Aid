@@ -61,6 +61,13 @@ public class Main extends Application implements MainInterface {
 	private Queue<Task<Integer>> festivalTasks;
 	private FestivalService festivalService;
 	private boolean _firstTimeRun;
+	private String currentWordList; /*Hi there Morning Ryan, 
+	cheer up. we are almost there :)
+	SO... we want to make it so that separate stats files are saved for each wordlist stats_WORDLISTNAME.ser
+	it could be as easy as figuring out how the .ser file works 
+	
+	also, on bootup the user should choose which file to start with. 
+	*/
 	Stage _stage;
 	{
 		screens = new HashMap<String, Scene>();
@@ -431,5 +438,15 @@ public class Main extends Application implements MainInterface {
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	
+	public void setCurrentWordList(String path) {
+		currentWordList = path;
+	}
+
+	
+	public String getCurrentWordListPath() {
+		return currentWordList;
 	}
 }

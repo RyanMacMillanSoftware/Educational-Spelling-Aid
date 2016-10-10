@@ -11,6 +11,7 @@ import javafx.stage.Window;
 public interface MainInterface {
 	public static final String STATS_PATH = System.getProperty("user.home")+"/.user/stats.ser";
 	public final Stage _stage = null;
+	
 	/**
 	 * Request a scene change in the application.
 	 * @param key

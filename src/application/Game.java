@@ -72,10 +72,8 @@ public class Game {
 	 */
 	public void wordListFile(){
 		try {
-			//final String dir = System.getProperty("user.dir");
 			File path = new File(main.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
 			File file = new File(path.getParent()+"/src/.listpath.txt");
-			//File file = new File(dir +"/src/.listpath.txt");
 			if (!file.exists()) {
 				//Alert alert = new Alert//TODO: idk mayn
 				System.out.println("doesnt exist");
@@ -152,10 +150,7 @@ public class Game {
 	 */
 	private boolean getWordList(){
 		try {
-			//File path = new File(main.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
 			File file = new File(wordListFileName);
-			//File file = new File();
-			System.out.println(file.getAbsolutePath());
 			if(!file.exists()){
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setContentText("You don't have a word list!\nPlease put one in the folder that you ran the spelling app from.");

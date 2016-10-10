@@ -51,7 +51,7 @@ public class MainMenuController extends SceneController{
 
 				FileWriter fw = new FileWriter(file.getAbsoluteFile());
 				BufferedWriter bw = new BufferedWriter(fw);
-				bw.write(path.getParent() + "/"+filename+"\n");
+				bw.write(path + "/"+filename+"\n");
 				bw.close();
 
 
