@@ -13,7 +13,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -56,12 +58,16 @@ public class Main extends Application implements MainInterface {
 													// needed to get controllers
 	private SceneController currentController; // current controller to
 												// displayed scene
+	private ArrayList<StatisticsModel> statsModels = new ArrayList<StatisticsModel>();
 	private StatisticsModel statsModel;
 	private Game game;
 	private Queue<Task<Integer>> festivalTasks;
 	private FestivalService festivalService;
 	private boolean _firstTimeRun;
-	private String currentWordList; /*Hi there Morning Ryan, 
+	private String currentWordList = "/home/ryan/git/voxspell/Alternate_list.txt"; 
+	//private String STATS_PATH;
+	
+	/*Hi there Morning Ryan, 
 	cheer up. we are almost there :)
 	SO... we want to make it so that separate stats files are saved for each wordlist stats_WORDLISTNAME.ser
 	it could be as easy as figuring out how the .ser file works.
@@ -85,10 +91,38 @@ public class Main extends Application implements MainInterface {
 		screens = new HashMap<String, Scene>();
 		screenFXMLs = new HashMap<String, FXMLLoader>();
 		_firstTimeRun = false;
-		statsModel = new StatisticsModel(this);
+		statsModels.add(new StatisticsModel(this));
+		statsModel = statsModels.get(0);
 		_firstTimeRun = statsModel.isFirstTime();
 		festivalService = new FestivalService();
 		festivalTasks = new LinkedList<Task<Integer>>();
+	}
+	
+	/**
+	 * Add a stats model, representing a wordlist, to the list of stats models. change this after the wordlist
+	 */
+	public void addStatsModel(){
+		boolean alreadyexists = false;
+		for (StatisticsModel s : statsModels){
+			if (s.getStatsName().equals(getStatsName())){
+				alreadyexists = true;
+			}
+		}
+		if (!alreadyexists){
+			statsModels.add(new StatisticsModel(this));
+		}
+	}
+	
+	/**
+	 * change the currently used stats model. change this after the wordlist
+	 * @param statsname: nameofwordlist.ser
+	 */
+	public void changeStatsModel(String statsname){
+		for (StatisticsModel s : statsModels){
+			if (s.getStatsName().equals(statsname)){
+				statsModel = s;
+			}
+		}
 	}
 
 	@Override
@@ -159,19 +193,17 @@ public class Main extends Application implements MainInterface {
 	 * @author Ryan MacMillan
 	 */
 	private void setupVideoFile() {
-		/*InputStream video1 = this.getClass().getClassLoader().getResourceAsStream("resources/big_buck_bunny_1_minute.mp4");
-		File video = new File(video1);
-		File destination = new File(System.getProperty("user.home") + "/.user/BigBuckBunny.mp4");*/
-		try {
-			exportResource("/resources/big_buck_bunny_1_minute.mp4",System.getProperty("user.home")+"/.user/BigBuckBunny.mp4");
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		ProcessBuilder pb = new ProcessBuilder("/bin/bash", "-c",
-				"ffmpeg -i ~/.user/BigBuckBunny.mp4 -filter_complex \"[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]\" -map \"[v]\" -map \"[a]\" -strict -2 ~/.user/SpedUpReward.mp4");
+	
 		
-			//copyFile(video, destination);
-			
+		try {
+			File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+		 
+		 
+		File file = new File(path.getParent()+"/resources/big_buck_bunny_1_minute.mp4");
+		
+		ProcessBuilder pb = new ProcessBuilder("/bin/bash", "-c",
+				"ffmpeg -i "+file.getAbsolutePath()+" 4 -filter_complex \"[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]\" -map \"[v]\" -map \"[a]\" -strict -2 "+path.getParent()+"/resources/SpedUpBunny.mp4");
+		
 			Task<Integer> ffmpegTask = new Task<Integer>() {
 				@Override
 				protected Integer call() throws Exception {
@@ -211,7 +243,10 @@ public class Main extends Application implements MainInterface {
 			};
 			new Thread(ffmpegTask).start();
 
-		
+		}catch (URISyntaxException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	/**
@@ -396,7 +431,6 @@ public class Main extends Application implements MainInterface {
 							new Thread(task).start();
 						}
 					} catch (InterruptedException | ExecutionException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -458,7 +492,10 @@ public class Main extends Application implements MainInterface {
 	}
 
 	
-	public String getCurrentWordListPath() {
-		return currentWordList;
+	public String getStatsName() {
+		String[] getName = currentWordList.split("/");
+		String name = getName[getName.length-1];
+		String[] removeType =name.split(".txt");
+		return "." + removeType[0] + ".ser";
 	}
 }

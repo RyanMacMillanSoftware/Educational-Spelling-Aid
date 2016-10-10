@@ -53,7 +53,9 @@ public class MainMenuController extends SceneController{
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write(path.getParent() + "/"+filename+"\n");
 				bw.close();
-
+				application.setCurrentWordList(path.getParent() + "/"+filename);
+				application.addStatsModel();
+				application.changeStatsModel(application.getStatsName());
 
 			} catch (IOException ex) {
 				ex.printStackTrace();

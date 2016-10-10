@@ -9,9 +9,25 @@ import javafx.stage.Window;
  *
  */
 public interface MainInterface {
-	public static final String STATS_PATH = System.getProperty("user.home")+"/.user/stats.ser";
+	public String STATS_PATH=null;
 	public final Stage _stage = null;
+	public String currentWordList = null;
 	
+	
+	public void setCurrentWordList(String path);
+	
+	public String getStatsName();
+	
+	/**
+	 * Add a stats model, representing a wordlist, to the list of stats models. change this after the wordlist
+	 */
+	public void addStatsModel();
+	
+	/**
+	 * change the currently used stats model. change this after the wordlist
+	 * @param statsname: nameofwordlist.ser
+	 */
+	public void changeStatsModel(String statsname);
 	/**
 	 * Request a scene change in the application.
 	 * @param key
