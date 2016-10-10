@@ -11,6 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import controller.IntialFileController;
 import controller.IntroController;
 import controller.LevelController;
 import controller.SceneController;
@@ -277,6 +278,14 @@ public class ModelUpdateEvent {
 			break;
 		}
 
+	}
+	
+	public void updateFromIntroFileController(){
+		switch (_message) {
+		case "onToLevels":
+				_main.requestSceneChange("firstTime");
+			break;
+		}
 	}
 
 	/**

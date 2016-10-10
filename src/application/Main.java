@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ExecutionException;
 
+import controller.IntialFileController;
 import controller.IntroController;
 import controller.LevelController;
 import controller.MainMenuController;
@@ -64,7 +65,7 @@ public class Main extends Application implements MainInterface {
 	private Queue<Task<Integer>> festivalTasks;
 	private FestivalService festivalService;
 	private boolean _firstTimeRun;
-	private String currentWordList = "/home/ryan/git/voxspell/Alternate_list.txt"; 
+	private static String currentWordList = "/home/ryan/git/voxspell/Alternate_list.txt"; 
 	//private String STATS_PATH;
 	
 	/*Hi there Morning Ryan, 
@@ -85,7 +86,13 @@ public class Main extends Application implements MainInterface {
 	why does the first word, seocnd game play before "spell the spoken word"?
 	
 	also, on bootup the user should choose which file to start with. 
+	
+	
 	*/
+	
+	public static String getCurrentWordList(){
+		return currentWordList;
+	}
 	Stage _stage;
 	{
 		screens = new HashMap<String, Scene>();
@@ -133,7 +140,7 @@ public class Main extends Application implements MainInterface {
 		try {
 			primaryStage.setTitle("VoxSpell v1.0.1");
 			if(_firstTimeRun){
-				requestSceneChange("firstTime");
+				requestSceneChange("firstFile");
 			}else{
 				requestSceneChange("mainMenu");
 			}
@@ -200,9 +207,10 @@ public class Main extends Application implements MainInterface {
 		 
 		 
 		File file = new File(path.getParent()+"/resources/big_buck_bunny_1_minute.mp4");
+		File dest = new File(path.getParent()+"/resources/SpedUpBunny.mp4");
 		
 		ProcessBuilder pb = new ProcessBuilder("/bin/bash", "-c",
-				"ffmpeg -i "+file.getAbsolutePath()+" 4 -filter_complex \"[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]\" -map \"[v]\" -map \"[a]\" -strict -2 "+path.getParent()+"/resources/SpedUpBunny.mp4");
+				"ffmpeg -i "+file.getAbsolutePath()+" -filter_complex \"[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]\" -map \"[v]\" -map \"[a]\" -strict -2 "+dest.getAbsolutePath());
 		
 			Task<Integer> ffmpegTask = new Task<Integer>() {
 				@Override
@@ -479,7 +487,10 @@ public class Main extends Application implements MainInterface {
 			mue.updateFromVideoController();
 		} else if (mue.getControllerClass().equals(IntroController.class)){
 			mue.updateFromIntroController();
+		} else if (mue.getControllerClass().equals(IntialFileController.class)){
+			mue.updateFromIntroFileController();
 		} 
+		
 	}
 
 	public static void main(String[] args) {
