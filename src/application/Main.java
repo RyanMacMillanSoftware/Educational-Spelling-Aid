@@ -64,7 +64,19 @@ public class Main extends Application implements MainInterface {
 	private String currentWordList; /*Hi there Morning Ryan, 
 	cheer up. we are almost there :)
 	SO... we want to make it so that separate stats files are saved for each wordlist stats_WORDLISTNAME.ser
-	it could be as easy as figuring out how the .ser file works 
+	it could be as easy as figuring out how the .ser file works.
+	
+	depending on currentWordList, open different stats ser
+	depending on ..., save to different stats.ser
+	
+	have a global stats.ser that changes or do I just need to change .ser state and it will fix everything
+	
+	make sure levels work properly. 
+	
+	save all files locally
+	
+	why does stats not show until you change mode?
+	why does the first word, seocnd game play before "spell the spoken word"?
 	
 	also, on bootup the user should choose which file to start with. 
 	*/
