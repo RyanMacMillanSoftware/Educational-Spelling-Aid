@@ -27,6 +27,7 @@
           <RowConstraints minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <AnchorPane GridPane.rowIndex="1">
@@ -35,14 +36,12 @@
                      <font>
                         <Font size="40.0" />
                      </font>
-                     <graphic>
-                        <ImageView blendMode="MULTIPLY" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" translateX="-20.0">
-                           <image>
-                              <Image url="@../resources/Notepad_icon.svg.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                   </Button>
+                  <ImageView blendMode="MULTIPLY" fitHeight="80.0" fitWidth="80.0" layoutX="122.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/Notepad_icon.svg.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane GridPane.rowIndex="2">
@@ -51,14 +50,12 @@
                      <font>
                         <Font size="40.0" />
                      </font>
-                     <graphic>
-                        <ImageView blendMode="MULTIPLY" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" translateX="-20.0">
-                           <image>
-                              <Image url="@../resources/list.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                   </Button>
+                  <ImageView blendMode="MULTIPLY" fitHeight="80.0" fitWidth="80.0" layoutX="119.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/list.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane GridPane.rowIndex="3">
@@ -67,14 +64,12 @@
                      <font>
                         <Font size="40.0" />
                      </font>
-                     <graphic>
-                        <ImageView blendMode="MULTIPLY" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" translateX="-20.0">
-                           <image>
-                              <Image url="@../resources/graph.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                   </Button>
+                  <ImageView blendMode="MULTIPLY" fitHeight="80.0" fitWidth="80.0" layoutX="116.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/graph.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <StackPane style="-fx-border-color: #cfd3df; -fx-border-width: 0 0 1 0;" styleClass="bluebackground" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
@@ -86,6 +81,17 @@
                   </Label>
                </children>
             </StackPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+               <children>
+                  <Button fx:id="changeWordlistBtn" mnemonicParsing="false" onMouseClicked="#chooseFile" prefHeight="120.0" prefWidth="800.0" text="Change Words" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="79.0" fitWidth="131.0" layoutX="97.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
          </children>
       </GridPane>
    </children>

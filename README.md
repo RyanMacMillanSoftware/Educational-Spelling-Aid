@@ -1,5 +1,7 @@
 # VoxSpell Spelling Aid #
 
+upi: rmac460
+
 Installation instructions:
 
 1. Unzip the file into any directory you wish (preferably your user directory)

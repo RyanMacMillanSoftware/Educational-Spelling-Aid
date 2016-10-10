@@ -242,6 +242,7 @@ public class ModelUpdateEvent {
 			break;
 		}
 	}
+	
 	public void updateFromIntroController(){
 		IntroController ic = (IntroController) _sc;
 		switch(_message){
@@ -260,7 +261,9 @@ public class ModelUpdateEvent {
 			_main.requestSceneChange("mainMenu");
 			break;
 		}
+		
 	}
+	
 	
 	
 	/**

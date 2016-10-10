@@ -2,8 +2,12 @@ package application;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.InvalidClassException;
+import java.io.ObjectInputStream;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,6 +18,7 @@ import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import resources.StoredStats;
 import resources.StoredStats.Type;
 /**
  * Game model class
@@ -28,7 +33,6 @@ import resources.StoredStats.Type;
  */
 public class Game {
 	public static final int WORDS_NUM = 10;
-	public static final String WORDLIST = "NZCER-spelling-lists.txt";
 	public static final int SAY_SPEED_INTRO = 1;
 	public static final int SAY_SPEED_DEFAULT = 1;
 	public static final int SAY_SPEED_SLOW = 2;
@@ -36,7 +40,8 @@ public class Game {
 	private StatisticsModel stats;
 	private MainInterface main;
 	private List<String> wordList;
-	
+
+	public static String wordListFileName;
 	private boolean faulted;
 	private boolean prevFaulted;
 	private boolean review;
@@ -56,9 +61,40 @@ public class Game {
 		main = app;
 		stats = statsModel;
 		wordList = new LinkedList<String>();
-		voiceType = "kal_diphone"; //FIXME: CHECK WHICH VOICES ARE AVAILABLE ON ECE MACHINE
+		voiceType = "kal_diphone";
 		_level = level;
+		wordListFile();
 	}
+	
+	/**
+	 * reads wordlist name as stored in file .listpath.txt
+	 * @author ryan
+	 */
+	public void wordListFile(){
+		try {
+			//final String dir = System.getProperty("user.dir");
+			File path = new File(main.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+			File file = new File(path.getParent()+"/src/.listpath.txt");
+			//File file = new File(dir +"/src/.listpath.txt");
+			if (!file.exists()) {
+				//Alert alert = new Alert//TODO: idk mayn
+				System.out.println("doesnt exist");
+			}
+			FileInputStream fileIn = new FileInputStream(file);
+			BufferedReader r = new BufferedReader(new InputStreamReader(fileIn));
+			String line = r.readLine();
+			wordListFileName = line;
+			fileIn.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}catch (URISyntaxException e1) {
+			e1.printStackTrace();
+		}
+		
+		
+		
+	}
+	
 	
 	/**
 	 * Get word list
@@ -116,8 +152,10 @@ public class Game {
 	 */
 	private boolean getWordList(){
 		try {
-			File path = new File(main.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
-			File file = new File(path.getParent()+"/"+WORDLIST);
+			//File path = new File(main.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+			File file = new File(wordListFileName);
+			//File file = new File();
+			System.out.println(file.getAbsolutePath());
 			if(!file.exists()){
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setContentText("You don't have a word list!\nPlease put one in the folder that you ran the spelling app from.");
@@ -142,7 +180,7 @@ public class Game {
 			Collections.shuffle(wordList);
 			br.close();
 			return true;
-		} catch (IOException | URISyntaxException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
 		}

@@ -2,6 +2,7 @@ package application;
 import java.util.Collection;
 
 import javafx.stage.Stage;
+import javafx.stage.Window;
 /**
  * Interface representing the main application model
  * @author Mohan Cao
@@ -9,6 +10,7 @@ import javafx.stage.Stage;
  */
 public interface MainInterface {
 	public static final String STATS_PATH = System.getProperty("user.home")+"/.user/stats.ser";
+	public final Stage _stage = null;
 	/**
 	 * Request a scene change in the application.
 	 * @param key

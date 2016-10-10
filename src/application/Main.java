@@ -23,6 +23,7 @@ import java.util.concurrent.ExecutionException;
 
 import controller.IntroController;
 import controller.LevelController;
+import controller.MainMenuController;
 import controller.QuizController;
 import controller.SceneController;
 import controller.StatsController;
@@ -425,7 +426,7 @@ public class Main extends Application implements MainInterface {
 			mue.updateFromVideoController();
 		} else if (mue.getControllerClass().equals(IntroController.class)){
 			mue.updateFromIntroController();
-		}
+		} 
 	}
 
 	public static void main(String[] args) {
