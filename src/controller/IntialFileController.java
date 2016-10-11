@@ -9,12 +9,17 @@ import java.net.URISyntaxException;
 import application.ModelUpdateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class IntialFileController extends SceneController{
 
+	@FXML
+    private Label chosenListDisplay;
+
+	
 	@FXML public void openFileChooser(MouseEvent event) {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Select a Word List");
@@ -33,6 +38,7 @@ public class IntialFileController extends SceneController{
 				application.setCurrentWordList(path.getParent() + "/"+filename);
 				application.addStatsModel();
 				application.changeStatsModel(application.getStatsName());
+				chosenListDisplay.setText(filename);
 
 			} catch (URISyntaxException e1) {
 				e1.printStackTrace();

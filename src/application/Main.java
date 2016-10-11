@@ -73,8 +73,6 @@ public class Main extends Application implements MainInterface {
 	
 	how can the user NOT choose a starting level or choose a starting level upon NEW wordlist?
 	
-	videos aren't working
-	
 	make sure levels work properly. 
 	
 	why does stats not show until you change mode?

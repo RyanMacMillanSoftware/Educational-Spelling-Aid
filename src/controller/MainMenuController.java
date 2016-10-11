@@ -25,7 +25,7 @@ public class MainMenuController extends SceneController{
 	@FXML private Button changeWordlistBtn;
 	
 	@FXML public void chooseFile(MouseEvent e){
-		FileChooser fileChooser = new FileChooser();
+		/*FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Select a Word List");
 		fileChooser.getExtensionFilters().add(
 				new ExtensionFilter("Text Files", "*.txt"));
@@ -66,7 +66,8 @@ public class MainMenuController extends SceneController{
 		} else {
 			
 		}
-
+	*/
+		application.requestSceneChange("firstFile");
 		
 	}
 	

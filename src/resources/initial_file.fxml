@@ -5,17 +5,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="200.0" prefWidth="400.0" styleClass="bluebackground" stylesheets="@onetimelevelselect.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IntialFileController">
+<AnchorPane prefHeight="77.0" prefWidth="400.0" styleClass="bluebackground" stylesheets="@onetimelevelselect.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IntialFileController">
    <children>
       <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <FlowPane alignment="CENTER" hgap="20.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <FlowPane alignment="CENTER" hgap="10.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <children>
-                  <Label text="Choose an initial spelling list:" />
-                  <Button mnemonicParsing="false" onMouseClicked="#openFileChooser" text="Open File Chooser" />
+                  <Label text="Spelling List:" />
+                  <Label fx:id="chosenListDisplay" text="NZCER-spelling-lists.txt" />
                </children>
             </FlowPane>
-            <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#fileSelected" text="Confirm" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <FlowPane alignment="CENTER" hgap="20.0" prefHeight="25.0" prefWidth="400.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#openFileChooser" text="Choose File" />
+                  <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#fileSelected" text="Confirm" />
+               </children>
+            </FlowPane>
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
