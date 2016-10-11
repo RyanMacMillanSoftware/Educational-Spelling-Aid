@@ -23,6 +23,8 @@ public interface MainInterface {
 	 */
 	public void addStatsModel();
 	
+	public boolean statsModelExists(String statsname);
+	
 	/**
 	 * change the currently used stats model. change this after the wordlist
 	 * @param statsname: nameofwordlist.ser

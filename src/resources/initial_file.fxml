@@ -18,7 +18,7 @@
             <FlowPane alignment="CENTER" hgap="20.0" prefHeight="25.0" prefWidth="400.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <children>
                   <Button mnemonicParsing="false" onMouseClicked="#openFileChooser" text="Choose File" />
-                  <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#fileSelected" text="Confirm" />
+                  <Button fx:id="confirmBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#fileSelected" text="Confirm" />
                </children>
             </FlowPane>
          </children>

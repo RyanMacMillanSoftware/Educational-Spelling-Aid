@@ -101,7 +101,13 @@ public class StatisticsModel {
 		}
 		globalStats.addStats(sessionStats);
 		sessionStats.clearStats();
-		application.writeObjectToFile("/resources/" + application.getStatsName(), globalStats);
+		try {
+			File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+			application.writeObjectToFile(path.getParent()+"/src/resources/" + application.getStatsName(), globalStats);
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

@@ -65,15 +65,13 @@ public class Main extends Application implements MainInterface {
 	private Queue<Task<Integer>> festivalTasks;
 	private FestivalService festivalService;
 	private boolean _firstTimeRun;
-	private static String currentWordList = "/home/ryan/git/voxspell/Alternate_list.txt"; 
+	private static String currentWordList; 
 	//private String STATS_PATH;
 	
 	/*Hi there Morning Ryan, 
 	cheer up. we are almost there :)
 	
-	how can the user NOT choose a starting level or choose a starting level upon NEW wordlist?
-	
-	make sure levels work properly. 
+	why is a stats error always through when changing wordlist?
 	
 	why does stats not show until you change mode?
 	
@@ -88,10 +86,9 @@ public class Main extends Application implements MainInterface {
 	{
 		screens = new HashMap<String, Scene>();
 		screenFXMLs = new HashMap<String, FXMLLoader>();
-		_firstTimeRun = false;
-		statsModels.add(new StatisticsModel(this));
-		statsModel = statsModels.get(0);
-		_firstTimeRun = statsModel.isFirstTime();
+		//statsModels.add(new StatisticsModel(this));
+		//if (statsModels.size()>0){statsModel = statsModels.get(0);}
+		//_firstTimeRun = statsModel.isFirstTime();
 		festivalService = new FestivalService();
 		festivalTasks = new LinkedList<Task<Integer>>();
 	}
@@ -109,6 +106,16 @@ public class Main extends Application implements MainInterface {
 		if (!alreadyexists){
 			statsModels.add(new StatisticsModel(this));
 		}
+	}
+	
+	public boolean statsModelExists(String statsname){
+		boolean alreadyexists = false;
+		for (StatisticsModel s : statsModels){
+			if (s.getStatsName().equals(getStatsName())){
+				alreadyexists = true;
+			}
+		}
+		return alreadyexists;
 	}
 	
 	/**
@@ -130,11 +137,7 @@ public class Main extends Application implements MainInterface {
 		setupVideoFile();
 		try {
 			primaryStage.setTitle("VoxSpell v1.0.1");
-			if(_firstTimeRun){
-				requestSceneChange("firstFile");
-			}else{
-				requestSceneChange("mainMenu");
-			}
+			requestSceneChange("firstFile");
 			primaryStage.show();
 
 		} catch (Exception e) {

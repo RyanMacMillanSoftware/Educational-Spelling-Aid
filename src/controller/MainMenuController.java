@@ -25,50 +25,7 @@ public class MainMenuController extends SceneController{
 	@FXML private Button changeWordlistBtn;
 	
 	@FXML public void chooseFile(MouseEvent e){
-		/*FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Select a Word List");
-		fileChooser.getExtensionFilters().add(
-				new ExtensionFilter("Text Files", "*.txt"));
-		File newWordList = fileChooser.showOpenDialog(application._stage);
-		if (newWordList != null){
-			String filename = newWordList.getName();
-			//TODO: Write to wordlist file path file
-			
-			
-			try {
-				
-				final String dir = System.getProperty("user.dir");
-				File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
-				 
-				File file = new File(path.getParent()+"/src/.listpath.txt");
-				
-				//File file = new File(dir +"/src/.listpath.txt");
-
-				// if file doesnt exists, then create it
-				if (!file.exists()) {
-					file.createNewFile();
-				}
-
-				FileWriter fw = new FileWriter(file.getAbsoluteFile());
-				BufferedWriter bw = new BufferedWriter(fw);
-				bw.write(path.getParent() + "/"+filename+"\n");
-				bw.close();
-				application.setCurrentWordList(path.getParent() + "/"+filename);
-				application.addStatsModel();
-				application.changeStatsModel(application.getStatsName());
-
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}catch (URISyntaxException e1) {
-				e1.printStackTrace();
-			}
-			
-		} else {
-			
-		}
-	*/
 		application.requestSceneChange("firstFile");
-		
 	}
 	
 	/**
