@@ -70,23 +70,16 @@ public class Main extends Application implements MainInterface {
 	
 	/*Hi there Morning Ryan, 
 	cheer up. we are almost there :)
-	SO... we want to make it so that separate stats files are saved for each wordlist stats_WORDLISTNAME.ser
-	it could be as easy as figuring out how the .ser file works.
 	
-	depending on currentWordList, open different stats ser
-	depending on ..., save to different stats.ser
+	how can the user NOT choose a starting level or choose a starting level upon NEW wordlist?
 	
-	have a global stats.ser that changes or do I just need to change .ser state and it will fix everything
+	videos aren't working
 	
 	make sure levels work properly. 
 	
-	save all files locally
-	
 	why does stats not show until you change mode?
+	
 	why does the first word, seocnd game play before "spell the spoken word"?
-	
-	also, on bootup the user should choose which file to start with. 
-	
 	
 	*/
 	
@@ -206,9 +199,10 @@ public class Main extends Application implements MainInterface {
 			File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
 		 
 		 
-		File file = new File(path.getParent()+"/resources/big_buck_bunny_1_minute.mp4");
-		File dest = new File(path.getParent()+"/resources/SpedUpBunny.mp4");
-		
+		File file = new File(path.getParent()+"/src/resources/big_buck_bunny_1_minute.mp4");
+		File dest = new File(path.getParent()+"/src/resources/SpedUpBunny.mp4");
+		//System.out.println(file.getAbsolutePath());
+		//System.out.println(dest.getAbsolutePath());
 		ProcessBuilder pb = new ProcessBuilder("/bin/bash", "-c",
 				"ffmpeg -i "+file.getAbsolutePath()+" -filter_complex \"[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]\" -map \"[v]\" -map \"[a]\" -strict -2 "+dest.getAbsolutePath());
 		

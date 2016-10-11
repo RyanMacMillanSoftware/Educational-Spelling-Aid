@@ -246,7 +246,7 @@ public class ModelUpdateEvent {
 	public void updateFromVideoController() {
 		switch (_message) {
 		case "speedyReward":
-			URL url = getClass().getClassLoader().getResource("resources/SpedUpBunny.mp4");
+			URL url = getClass().getClassLoader().getResource("src/resources/SpedUpBunny.mp4");
 			Media media = new Media(url.toString());
 			_sc.onModelChange("speedyReward", media);
 
