@@ -24,7 +24,7 @@
           <CategoryAxis side="BOTTOM" />
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="yAxis" lowerBound="99.0" side="LEFT" upperBound="99.0" />
+          <NumberAxis fx:id="yAxis" autoRanging="false" minorTickCount="4" pickOnBounds="false" side="LEFT" tickLabelGap="8.0" tickUnit="10.0" />
         </yAxis>
       </BarChart>
    </center>
