@@ -9,15 +9,19 @@ import java.io.InputStreamReader;
 import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import resources.StoredStats;
 import resources.StoredStats.Type;
 /**
@@ -120,11 +124,11 @@ public class Game {
 	public void changeVoice(){
 		if(voiceType.equals("kal_diphone")){
 			voiceType = "akl_nz_jdt_diphone";
-			main.sayWord(SAY_SPEED_DEFAULT, voiceType, "Now using auckland new zealand jdt diphone");
+			main.sayWord(SAY_SPEED_DEFAULT, voiceType, "Gidday");
 		}
 		else {
 			voiceType = "kal_diphone";
-			main.sayWord(SAY_SPEED_DEFAULT, voiceType, "Now using "+voiceType.replace("_", " "));
+			//main.sayWord(SAY_SPEED_DEFAULT, voiceType, "Now using "+voiceType.replace("_", " "));
 		}
 	}
 	/**
@@ -225,8 +229,19 @@ public class Game {
 		}
 		if(!wordList.isEmpty()){
 				wordList = wordList.subList(0, (wordList.size()>=WORDS_NUM)?WORDS_NUM:wordList.size());
-				main.sayWord(SAY_SPEED_INTRO,voiceType,"Please spell the spoken words.");
-				main.sayWord(SAY_SPEED_DEFAULT,voiceType,wordList.get(0));
+				URL url = getClass().getClassLoader().getResource("src/resources/please_spell.m4a");
+				Media media = new Media(url.toString());
+				MediaPlayer player = new MediaPlayer(media);
+				player.setCycleCount(0);
+		    	player.play();
+		    	player.setOnEndOfMedia(new Runnable() {
+		            @Override public void run() {
+		            	player.stop();
+		            	main.sayWord(SAY_SPEED_DEFAULT,voiceType,wordList.get(0));
+		            }
+		          });
+		    	main.sayWord(SAY_SPEED_DEFAULT,voiceType, wordList.get(0));
+				
 		}
 		//set faulted=false for first word
 		main.tell("setProgress",0d);
@@ -269,6 +284,7 @@ public class Game {
 	 * @author Mohan Cao
 	 */
 	public void submitWord(String word){
+		boolean playReward=false;
 		if(!gameEnded){
 			int speed = SAY_SPEED_DEFAULT;
 			boolean prev2Faulted = prevFaulted;
@@ -288,7 +304,10 @@ public class Game {
 				stats.getSessionStats().setStats(Type.FAILED, testWord, 0);
 				stats.getGlobalStats().setStats(Type.FAULTED, testWord, 0);
 				stats.getSessionStats().setStats(Type.FAULTED, testWord, 0);
+				
 				}
+				playReward = true;
+				
 				wordList.remove(0);
 			}else if(faulted&&!prevFaulted){
 				//faulted once => set faulted
@@ -317,7 +336,26 @@ public class Game {
 				_incorrect++;
 			}
 			if(wordList.size()!=0){
-				main.sayWord(speed,voiceType, wordList.get(0));
+				if (playReward){
+					Random rand = new Random();
+					int n = rand.nextInt(2)+1;
+					URL url = getClass().getClassLoader().getResource("src/resources/woohoo.m4a");
+					if(n%2==1){
+						url = getClass().getClassLoader().getResource("src/resources/yay.m4a");
+					}
+					Media media = new Media(url.toString());
+					MediaPlayer player = new MediaPlayer(media); 
+			    	player.play();
+			    	player.setOnEndOfMedia(new Runnable() {
+			            @Override public void run() {
+			            	player.stop();
+			            	main.sayWord(SAY_SPEED_DEFAULT,voiceType,wordList.get(0));
+			            }
+			          });
+				} else{
+					main.sayWord(speed,voiceType, wordList.get(0));
+				}
+				
 			}else{
 				//end game
 				if(prevFaulted||faulted||prev2Faulted){
@@ -331,6 +369,10 @@ public class Game {
 					main.tell("showRewards");
 				}
 				gameEnded=true;
+				URL url = getClass().getClassLoader().getResource("src/resources/good_work.m4a");
+				Media media = new Media(url.toString());
+				MediaPlayer player = new MediaPlayer(media); 
+		    	player.play();
 			}
 			//set progressbars for progress through quiz and also denote additional separation for faulted words
 			main.tell("setProgress",(wordListSize-wordList.size()+((faulted)?0.5:0))/(double)wordListSize);
@@ -338,4 +380,16 @@ public class Game {
 	}
 	
 	
+
+	private void playRandomMusicReward() {
+		Random rand = new Random();
+		int n = rand.nextInt(2)+1;
+		URL url = getClass().getClassLoader().getResource("src/resources/woohoo.m4a");
+		if(n%2==1){
+			url = getClass().getClassLoader().getResource("src/resources/yay.m4a");
+		}
+		Media media = new Media(url.toString());
+		MediaPlayer player = new MediaPlayer(media); 
+    	player.play();
+	}
 }

@@ -16,6 +16,8 @@ public interface MainInterface {
 	
 	public void setCurrentWordList(String path);
 	
+	public StatisticsModel getStatsModel();
+	
 	public String getStatsName();
 	
 	/**

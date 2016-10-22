@@ -64,7 +64,6 @@ public class Main extends Application implements MainInterface {
 	private Game game;
 	private Queue<Task<Integer>> festivalTasks;
 	private FestivalService festivalService;
-	private boolean _firstTimeRun;
 	private static String currentWordList; 
 	//private String STATS_PATH;
 	
@@ -73,11 +72,29 @@ public class Main extends Application implements MainInterface {
 	
 	why is a stats error always through when changing wordlist?
 	
-	why does stats not show until you change mode?
+	
+	
+	festival backing up tts
+	
+	
+	need a help feature
+	
+	
+	choose file "back to main menu" btn
+	
+	add best score feature?
+	
+	make file and level chooser similar scenes to the others
 	
 	why does the first word, seocnd game play before "spell the spoken word"?
 	
+	change game win scene to recommend a new list
+	
 	*/
+	
+	public StatisticsModel getStatsModel(){
+		return statsModel;
+	}
 	
 	public static String getCurrentWordList(){
 		return currentWordList;
@@ -148,7 +165,9 @@ public class Main extends Application implements MainInterface {
 	@Override
 	public void stop() {
 		currentController.cleanup();
-		statsModel.sessionEnd();
+		if (statsModel != null){
+			statsModel.sessionEnd();
+		}
 		festivalService.cleanup();
 	}
 

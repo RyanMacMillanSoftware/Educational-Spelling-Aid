@@ -33,7 +33,7 @@ public class IntialFileController extends SceneController{
 				new ExtensionFilter("Text Files", "*.txt"));
 		File newWordList = fileChooser.showOpenDialog(application._stage);
 		if (newWordList != null){
-			confirmBtn.setDisable(false);
+			
 			String filename = newWordList.getName();
 			//TODO: Write to wordlist file path file
 			
@@ -41,16 +41,16 @@ public class IntialFileController extends SceneController{
 			try {
 				
 				File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
-				
-				application.setCurrentWordList(path.getParent() + "/"+filename);
 				currentwordlist = path.getParent()+"/"+filename;
-				application.addStatsModel();
-				application.changeStatsModel(application.getStatsName());
+				application.setCurrentWordList(currentwordlist);
+				
+				
 				chosenListDisplay.setText(filename);
 
 			} catch (URISyntaxException e1) {
 				e1.printStackTrace();
 			}
+			confirmBtn.setDisable(false);
 			
 		} else {
 			
@@ -58,11 +58,20 @@ public class IntialFileController extends SceneController{
 
 	}
 
-	@FXML public void fileSelected(MouseEvent event) {
-		if(application.statsModelExists(currentwordlist)){
+	@FXML public void fileSelected(MouseEvent event) throws URISyntaxException {
+		
+		application.addStatsModel();
+		
+		File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+		File file = new File(path.getParent()+"/src/resources/"+ application.getStatsName());
+		if (file.exists()){
+			application.changeStatsModel(application.getStatsName());
 			application.requestSceneChange("mainMenu");
 		} else{
-		application.update(new ModelUpdateEvent(this,"onToLevels"));
+			
+			application.changeStatsModel(application.getStatsName());
+			application.update(new ModelUpdateEvent(this,"onToLevels"));
+			
 		}
 	}
 

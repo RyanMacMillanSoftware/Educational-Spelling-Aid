@@ -25,6 +25,7 @@ public class MainMenuController extends SceneController{
 	@FXML private Button changeWordlistBtn;
 	
 	@FXML public void chooseFile(MouseEvent e){
+		application.getStatsModel().sessionEnd();
 		application.requestSceneChange("firstFile");
 	}
 	

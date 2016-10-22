@@ -11,6 +11,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -24,7 +25,7 @@ import resources.StoredStats.Type;
 /**
  *
  * A view-controller that is bound to the stats_layout fxml
- * @author Mohan Cao
+ * @author Mohan Cao 
  *
  */
 public class StatsController extends SceneController{
@@ -33,16 +34,22 @@ public class StatsController extends SceneController{
     @FXML private Button clearStatsBtn;
     @FXML private TextArea statsTextArea;
     @FXML private ComboBox<String> statsSelection;
+    @FXML private NumberAxis yAxis;
+
     /**
 	 * Default FXML constructor, called before controller is initialized.
 	 */
 	@FXML
 	public void initialize(){
+		//yAxis.setLabel("Percentage");
+		//yAxis.setUpperBound(100);
+		//yAxis.setLowerBound(0);
 		barChartView.getYAxis().setLabel("Percentage");
 		statsSelection.getItems().addAll("All Time Scores", "Latest Scores");
 		statsSelection.getSelectionModel().select(1);
 		statsSelection.setEditable(false);
 		StatsController thisController = this;
+		
 		statsSelection.valueProperty().addListener(new ChangeListener<String>(){
 			SceneController sc = thisController;
 			@Override
@@ -84,6 +91,8 @@ public class StatsController extends SceneController{
 	}
 	@Override
 	public void init(String[] args) {
+		statsSelection.setValue("Latest Scores");
+		application.update(new ModelUpdateEvent(this, "requestSessionStats"));
 		barChartView.setAnimated(false);
 		barChartView.setLegendVisible(false);
 		statsTextArea.setEditable(false);

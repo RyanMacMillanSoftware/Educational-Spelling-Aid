@@ -49,7 +49,7 @@ public class StatisticsModel {
 		
 			try {
 				File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
-				File file = new File(path.getParent()+"/src/resources/."+ application.getStatsName());
+				File file = new File(path.getParent()+"/src/resources/"+ application.getStatsName());
 				if(!file.exists()){
 					
 				
@@ -71,7 +71,13 @@ public class StatisticsModel {
 		
 		//load global stats using the application model if possible
 		if(main!=null){
-			Object temp = application.loadObjectFromFile("/resources/" + application.getStatsName());
+			File path = null;
+			try {
+				path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+			Object temp = application.loadObjectFromFile(path.getParent()+"/src/resources/" + application.getStatsName());
 			if(temp instanceof StoredStats){
 				globalStats = (StoredStats)temp;
 			}else{
@@ -105,7 +111,6 @@ public class StatisticsModel {
 			File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
 			application.writeObjectToFile(path.getParent()+"/src/resources/" + application.getStatsName(), globalStats);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
