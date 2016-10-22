@@ -60,7 +60,7 @@ public class Main extends Application implements MainInterface {
 	private SceneController currentController; // current controller to
 												// displayed scene
 	private ArrayList<StatisticsModel> statsModels = new ArrayList<StatisticsModel>();
-	private StatisticsModel statsModel;
+	private StatisticsModel statsModel = null;
 	private Game game;
 	private Queue<Task<Integer>> festivalTasks;
 	private FestivalService festivalService;
@@ -506,9 +506,9 @@ public class Main extends Application implements MainInterface {
 			mue.updateFromVideoController();
 		} else if (mue.getControllerClass().equals(IntroController.class)){
 			mue.updateFromIntroController();
-		} else if (mue.getControllerClass().equals(IntialFileController.class)){
+		} /*else if (mue.getControllerClass().equals(IntialFileController.class)){
 			mue.updateFromIntroFileController();
-		} 
+		} */
 	}
 
 	public static void main(String[] args) {
@@ -526,5 +526,12 @@ public class Main extends Application implements MainInterface {
 		String name = getName[getName.length-1];
 		String[] removeType =name.split(".txt");
 		return "." + removeType[0] + ".ser";
+	}
+	
+	public boolean hasStatsModel(){
+		if(statsModel==null){
+			return false;
+		}
+		return true;
 	}
 }

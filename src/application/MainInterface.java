@@ -25,6 +25,8 @@ public interface MainInterface {
 	 */
 	public void addStatsModel();
 	
+	public boolean hasStatsModel();
+	
 	public boolean statsModelExists(String statsname);
 	
 	/**

@@ -290,13 +290,13 @@ public class ModelUpdateEvent {
 
 	}
 	
-	public void updateFromIntroFileController(){
+	/*public void updateFromIntroFileController(){
 		switch (_message) {
 		case "onToLevels":
 				_main.requestSceneChange("firstTime");
 			break;
 		}
-	}
+	}*/
 
 	/**
 	 * Sets the game to the MainController's game

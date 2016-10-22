@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import application.ApplicationUtility;
 import application.ModelUpdateEvent;
 import application.StatisticsModel;
 import javafx.event.ActionEvent;
@@ -60,23 +61,38 @@ public class IntialFileController extends SceneController{
 
 	@FXML public void fileSelected(MouseEvent event) throws URISyntaxException {
 		
-		application.addStatsModel();
 		
+		boolean firsttime = true;
 		File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
 		File file = new File(path.getParent()+"/src/resources/"+ application.getStatsName());
 		if (file.exists()){
-			application.changeStatsModel(application.getStatsName());
 			application.requestSceneChange("mainMenu");
+			firsttime = false;
 		} else{
 			
-			application.changeStatsModel(application.getStatsName());
-			application.update(new ModelUpdateEvent(this,"onToLevels"));
-			
+			application.requestSceneChange("firstTime");
+		}
+		application.addStatsModel();
+		application.changeStatsModel(application.getStatsName());
+		if (!firsttime){
+			for (Integer i : application.getStatsModel().getSessionStats().getUnlockedLevelSet()){
+				System.out.println("s:" + i);
+				application.getStatsModel().getSessionStats().unlockLevel(i);
+				//application.getStatsModel().getGlobalStats().unlockLevel(i);
+			}
+			for (Integer i : application.getStatsModel().getGlobalStats().getUnlockedLevelSet()){
+				application.getStatsModel().getSessionStats().unlockLevel(i);
+				System.out.println("g: " + i);
+				//application.getStatsModel().getGlobalStats().unlockLevel(i);
+			}
 		}
 	}
 
 	@Override
 	public void init(String[] args) {
+		if (application.hasStatsModel()){
+		application.getStatsModel().sessionEnd();
+		}
 		confirmBtn.setDisable(true);
 		chosenListDisplay.setText("Please choose a file");
 	}

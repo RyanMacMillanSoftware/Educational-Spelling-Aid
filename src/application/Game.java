@@ -228,28 +228,21 @@ public class Game {
 			}
 		}
 		if(!wordList.isEmpty()){
-			URL url = getClass().getClassLoader().getResource("src/resources/please_spell.m4a");
+			URL url = getClass().getClassLoader().getResource("src/resources/please_spell.mp3");
 			Media media = new Media(url.toString());
 			MediaPlayer player = new MediaPlayer(media); 
-	    	Object o = new Object();
-	    	player.setAutoPlay(true);
-	    	//pla
-		    	
-		    	player.setOnEndOfMedia(new Runnable() {
+			player.play();
+	    	
+	    	main.tell("wait", 0d);
+	    	player.setOnEndOfMedia(new Runnable() {
 		            @Override public void run() {
 		            	main.sayWord(SAY_SPEED_DEFAULT,voiceType,wordList.get(0));
-		            	main.tell("resume", o);
+		            	main.tell("resume", 0d);
 		            	player.dispose();
 		            }
 		          });
-		    	player.setOnReady(new Runnable(){
-		    		@Override public void run(){
-
-		    			player.play();
-		    		}
-		    	});
-		    	//player.play();
-		    	main.tell("wait", o);
+		    	
+		    	
 				
 		}
 		//set faulted=false for first word
@@ -348,26 +341,25 @@ public class Game {
 				if (playReward){
 					Random rand = new Random();
 					int n = rand.nextInt(3)+1;
-					URL url = getClass().getClassLoader().getResource("src/resources/woohoo.m4a");
+					URL url = getClass().getClassLoader().getResource("src/resources/woohoo.mp3");
 					if(n%3==1){
-						url = getClass().getClassLoader().getResource("src/resources/yay.m4a");
+						url = getClass().getClassLoader().getResource("src/resources/yay.mp3");
 					}else if(n%3==2){
-						url = getClass().getClassLoader().getResource("src/resources/yeehaw.m4a");
+						url = getClass().getClassLoader().getResource("src/resources/yeehaw.mp3");
 					}
 					Media media = new Media(url.toString());
 					MediaPlayer player = new MediaPlayer(media); 
-			    	Object o = new Object();
-			    	player.setAutoPlay(true);
-			    	//pla
+					player.play();
+					main.tell("wait", 0d);
 				    	
 				    	player.setOnEndOfMedia(new Runnable() {
 				            @Override public void run() {
 				            	main.sayWord(SAY_SPEED_DEFAULT,voiceType,wordList.get(0));
-				            	main.tell("resume", o);
+				            	main.tell("resume", 0d);
 				            	player.dispose();
 				            }
 				          });
-				    	main.tell("wait", o);
+				    	
 			    	
 				} else{
 					main.sayWord(speed,voiceType, wordList.get(0));

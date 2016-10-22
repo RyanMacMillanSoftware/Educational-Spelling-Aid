@@ -55,22 +55,26 @@ public class StatisticsModel {
 				
 				
 				file.createNewFile();
-				}
-				
 				FileOutputStream fo = new FileOutputStream(file);
 				ObjectOutputStream oos = new ObjectOutputStream(fo);
 				oos.writeObject(new StoredStats());
 				oos.close();
 				fo.close();
 				_isFirstTime = true;
+				
+				}
+				
+				
 			}catch (IOException e) {
 				e.printStackTrace();
 			}catch (URISyntaxException e1) {
 				e1.printStackTrace();
 			}
+			
 		
 		//load global stats using the application model if possible
 		if(main!=null){
+			
 			File path = null;
 			try {
 				path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
