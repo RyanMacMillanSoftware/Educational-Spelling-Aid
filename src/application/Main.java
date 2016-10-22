@@ -72,9 +72,7 @@ public class Main extends Application implements MainInterface {
 	
 	how can we keep levels and global stats after shut down
 	
-	festival backing up tts
-	
-	need a help feature
+	s yesterday s need a help feature
 	
 	choose file "back to main menu" btn?
 	

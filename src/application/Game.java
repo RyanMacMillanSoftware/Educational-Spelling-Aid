@@ -232,9 +232,9 @@ public class Game {
 			Media media = new Media(url.toString());
 			MediaPlayer player = new MediaPlayer(media); 
 			player.play();
-	    	
-	    	main.tell("wait", 0d);
-	    	player.setOnEndOfMedia(new Runnable() {
+			main.tell("wait", 0d);
+		    	
+		    	player.setOnEndOfMedia(new Runnable() {
 		            @Override public void run() {
 		            	main.sayWord(SAY_SPEED_DEFAULT,voiceType,wordList.get(0));
 		            	main.tell("resume", 0d);

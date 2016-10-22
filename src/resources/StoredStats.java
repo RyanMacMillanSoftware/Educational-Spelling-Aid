@@ -207,10 +207,14 @@ public class StoredStats implements Serializable{
 	 * @param other
 	 */
 	public void addStats(StoredStats other){
+		for (Integer i : other.getUnlockedLevelSet()){
+			this.unlockLevel(i);
+		}
 		for(String key : other.getKeys()){
 			this.addStat(Type.MASTERED, key, other.getStat(Type.MASTERED, key), other.getLevel(key));
 			this.addStat(Type.FAULTED, key, other.getStat(Type.FAULTED, key), other.getLevel(key));
 			this.addStat(Type.FAILED, key, other.getStat(Type.FAILED, key), other.getLevel(key));
+			
 			this._unlockedLevels.putAll(other._unlockedLevels);
 		}
 	}

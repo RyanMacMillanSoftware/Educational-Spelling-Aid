@@ -75,14 +75,9 @@ public class IntialFileController extends SceneController{
 		application.addStatsModel();
 		application.changeStatsModel(application.getStatsName());
 		if (!firsttime){
-			for (Integer i : application.getStatsModel().getSessionStats().getUnlockedLevelSet()){
-				System.out.println("s:" + i);
-				application.getStatsModel().getSessionStats().unlockLevel(i);
-				//application.getStatsModel().getGlobalStats().unlockLevel(i);
-			}
+			
 			for (Integer i : application.getStatsModel().getGlobalStats().getUnlockedLevelSet()){
 				application.getStatsModel().getSessionStats().unlockLevel(i);
-				System.out.println("g: " + i);
 				//application.getStatsModel().getGlobalStats().unlockLevel(i);
 			}
 		}
