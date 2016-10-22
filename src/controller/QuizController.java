@@ -246,6 +246,18 @@ b	 * Gets text area input
 			wordTextArea.setDisable(true);
 			confirm.setDisable(true);
 			break;
+		case "wait":
+			wordTextArea.setDisable(true);
+			confirm.setDisable(true);
+			voiceBtn.setDisable(true);
+			repeatBtn.setDisable(true);
+			break;
+		case "resume":
+			wordTextArea.setDisable(false);
+			confirm.setDisable(false);
+			voiceBtn.setDisable(false);
+			repeatBtn.setDisable(false);
+			break;
 		}
 	}
 }

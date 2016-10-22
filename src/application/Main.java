@@ -70,23 +70,19 @@ public class Main extends Application implements MainInterface {
 	/*Hi there Morning Ryan, 
 	cheer up. we are almost there :)
 	
-	why is a stats error always through when changing wordlist?
-	
-	
+	how can we keep levels and global stats after shut down
 	
 	festival backing up tts
 	
-	
 	need a help feature
 	
-	
-	choose file "back to main menu" btn
+	choose file "back to main menu" btn?
 	
 	add best score feature?
 	
-	make file and level chooser similar scenes to the others
+	make file and level chooser similar scenes to the others?
 	
-	why does the first word, seocnd game play before "spell the spoken word"?
+	why does the first word, second game play before "spell the spoken word"?
 	
 	change game win scene to recommend a new list
 	
@@ -431,6 +427,9 @@ public class Main extends Application implements MainInterface {
 
 		@Override
 		protected Task<Integer> createTask() {
+			if(currentController.getClass().equals(QuizController.class)){
+				tell("wait", null);
+			}
 			final String voice = _voice;
 			final String[] words = _words;
 			final int speed = _speed;
@@ -451,13 +450,19 @@ public class Main extends Application implements MainInterface {
 						if (!festivalTasks.isEmpty()&&get()==0) {
 							Task<Integer> task = festivalTasks.poll();
 							new Thread(task).start();
+							if(currentController.getClass().equals(QuizController.class)){
+								tell("resume", null);
+							}
 						}
 					} catch (InterruptedException | ExecutionException e) {
 						e.printStackTrace();
 					}
 				}
 			};
+		
+			
 		}
+		
 
 	}
 
@@ -504,7 +509,6 @@ public class Main extends Application implements MainInterface {
 		} else if (mue.getControllerClass().equals(IntialFileController.class)){
 			mue.updateFromIntroFileController();
 		} 
-		
 	}
 
 	public static void main(String[] args) {

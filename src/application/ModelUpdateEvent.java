@@ -36,6 +36,8 @@ public class ModelUpdateEvent {
 	private StatisticsModel _statsModel;
 	private MainInterface _main;
 	private Game _game;
+	
+	
 
 	public ModelUpdateEvent(SceneController sc, String message) {
 		_message = message;
@@ -65,6 +67,8 @@ public class ModelUpdateEvent {
 		_statsModel = stats;
 	}
 
+	
+	
 	/**
 	 * Should be called if class is an update from a quiz controller This must
 	 * be called by the main application, and will not be called automatically
@@ -169,6 +173,12 @@ public class ModelUpdateEvent {
 			}
 			_game = null;
 			sendGameUpdateRequest();
+			break;
+		case "wait" :
+			_sc.onModelChange("wait", null);
+			break;
+		case "resume" :
+			_sc.onModelChange("resume", null);
 			break;
 		}
 	}
