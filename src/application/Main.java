@@ -35,6 +35,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -70,17 +71,17 @@ public class Main extends Application implements MainInterface {
 	/*Hi there Morning Ryan, 
 	cheer up. we are almost there :)
 	
-	how can we keep levels and global stats after shut down
-	
 	s yesterday s need a help feature
 	
+	Get better exemplar wordlist?
+	
 	choose file "back to main menu" btn?
+	
+	pause/play video instead of stop
 	
 	add best score feature?
 	
 	make file and level chooser similar scenes to the others?
-	
-	why does the first word, second game play before "spell the spoken word"?
 	
 	change game win scene to recommend a new list
 	
@@ -406,6 +407,7 @@ public class Main extends Application implements MainInterface {
 					Platform.exit();
 				}
 				_pb = new ProcessBuilder(output).start();
+				
 			} catch (IOException e) {
 				System.err.println("IOException");
 			}
@@ -445,6 +447,7 @@ public class Main extends Application implements MainInterface {
 				}
 
 				public void succeeded() {
+					
 					try {
 						if (!festivalTasks.isEmpty()&&get()==0) {
 							Task<Integer> task = festivalTasks.poll();
@@ -454,9 +457,8 @@ public class Main extends Application implements MainInterface {
 					} catch (InterruptedException | ExecutionException e) {
 						e.printStackTrace();
 					}
-					if(currentController.getClass().equals(QuizController.class)){
-						tell("resume", 0d);
-					}
+					
+					
 				}
 			};
 		
@@ -474,12 +476,9 @@ public class Main extends Application implements MainInterface {
 	 * @param words list of words to be said
 	 */
 	public void sayWord(final int speed, final String voiceType, final String... words) {
-		if(currentController.getClass().equals(QuizController.class)){
-			tell("wait", 0d);
-		}
 		festivalService.setVoice(voiceType);
 		festivalService.setWordsToList(speed, words);
-		if (festivalTasks.isEmpty()) {
+		if (!festivalTasks.isEmpty()) {
 			festivalTasks.add(festivalService.createTask());
 		}
 		Task<Integer> festivalTask = festivalService.createTask();

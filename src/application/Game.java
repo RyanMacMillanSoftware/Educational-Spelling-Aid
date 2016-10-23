@@ -239,6 +239,7 @@ public class Game {
 		    	player.setOnEndOfMedia(new Runnable() {
 		            @Override public void run() {
 		            	main.sayWord(SAY_SPEED_DEFAULT,voiceType,wordList.get(0));
+		            	main.tell("resume", 0d);
 		            }
 		          });
 		    	
@@ -286,6 +287,7 @@ public class Game {
 	 * @author Mohan Cao
 	 */
 	public void submitWord(String word){
+		boolean failedd = false;
 		boolean playReward=false;
 		if(!gameEnded){
 			int speed = SAY_SPEED_DEFAULT;
@@ -315,8 +317,8 @@ public class Game {
 				//faulted once => set faulted
 				main.tell("faultedWord",testWord);
 				speed = SAY_SPEED_SLOW;
-				main.sayWord(speed,voiceType, testWord);
-				main.sayWord(speed,voiceType, "The word is");
+				//main.sayWord(speed,voiceType, testWord);
+				//main.sayWord(speed,voiceType, "The word is");
 			}else if(!faulted&&prevFaulted){
 				//correct after faulted => store faulted
 				main.tell("masteredWord",testWord);
@@ -327,8 +329,8 @@ public class Game {
 				//give one more chance in review, set speed to very slow
 				main.tell("lastChanceWord",testWord);
 				speed = SAY_SPEED_VERYSLOW;
-				main.sayWord(speed,voiceType, testWord);
-				main.sayWord(speed,voiceType, "The word is");
+				//main.sayWord(speed,voiceType, testWord);
+				//main.sayWord(speed,voiceType, "The word is");
 			}else{
 				//faulted twice => failed
 				main.tell("failedWord",testWord);
@@ -336,6 +338,21 @@ public class Game {
 				stats.getSessionStats().addStat(Type.FAILED, testWord, 1, _level);
 				wordList.remove(0);
 				_incorrect++;
+				failedd = true;
+				URL url = getClass().getClassLoader().getResource("src/resources/weepwow.mp3");
+				Media media = new Media(url.toString());
+				player = new MediaPlayer(media); 
+				player.play();
+				main.tell("wait", 0d);
+			    	
+			    	player.setOnEndOfMedia(new Runnable() {
+			            @Override public void run() {
+			            	main.sayWord(SAY_SPEED_DEFAULT,voiceType, wordList.get(0));
+			            	main.tell("resume", 0d);
+			            }
+			          });
+			   
+			   
 			}
 			if(wordList.size()!=0){
 				if (playReward){
@@ -355,13 +372,12 @@ public class Game {
 				    	player.setOnEndOfMedia(new Runnable() {
 				            @Override public void run() {
 				            	main.sayWord(SAY_SPEED_DEFAULT,voiceType,wordList.get(0));
-				            	
-				            	player.dispose();
+				            	main.tell("resume",0d);
 				            }
 				          });
 				    	
 			    	
-				} else{
+				} else if(!failedd){
 					main.sayWord(speed,voiceType, wordList.get(0));
 				}
 				
