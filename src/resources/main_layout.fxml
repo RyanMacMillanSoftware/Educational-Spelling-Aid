@@ -37,9 +37,9 @@
                         <Font size="40.0" />
                      </font>
                   </Button>
-                  <ImageView blendMode="MULTIPLY" fitHeight="80.0" fitWidth="80.0" layoutX="122.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView blendMode="MULTIPLY" fitHeight="112.0" fitWidth="109.0" layoutX="89.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/Notepad_icon.svg.png" />
+                        <Image url="@LogoMakr%20(17).png" />
                      </image>
                   </ImageView>
                </children>
@@ -51,9 +51,9 @@
                         <Font size="40.0" />
                      </font>
                   </Button>
-                  <ImageView blendMode="MULTIPLY" fitHeight="80.0" fitWidth="80.0" layoutX="119.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView blendMode="MULTIPLY" fitHeight="100.0" fitWidth="109.0" layoutX="89.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/list.png" />
+                        <Image url="@LogoMakr%20(18).png" />
                      </image>
                   </ImageView>
                </children>
@@ -65,16 +65,16 @@
                         <Font size="40.0" />
                      </font>
                   </Button>
-                  <ImageView blendMode="MULTIPLY" fitHeight="80.0" fitWidth="80.0" layoutX="116.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView blendMode="MULTIPLY" fitHeight="100.0" fitWidth="109.0" layoutX="87.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/graph.png" />
+                        <Image url="@LogoMakr%20(19).png" />
                      </image>
                   </ImageView>
                </children>
             </AnchorPane>
             <StackPane style="-fx-border-color: #cfd3df; -fx-border-width: 0 0 1 0;" styleClass="bluebackground" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
                <children>
-                  <Label text="Spelling is Fun!">
+                  <Label text="VoxBun Spell ">
                      <font>
                         <Font name="SansSerif Regular" size="66.0" />
                      </font>
@@ -89,7 +89,10 @@
                         <Font size="40.0" />
                      </font>
                   </Button>
-                  <ImageView fitHeight="79.0" fitWidth="131.0" layoutX="97.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="112.0" fitWidth="119.0" layoutX="90.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@LogoMakr%20(12).png" />
+                     </image></ImageView>
                </children>
             </AnchorPane>
          </children>
