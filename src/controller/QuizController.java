@@ -31,7 +31,7 @@ public class QuizController extends SceneController{
 	
 	@FXML
 	public void initialize(){
-		Tooltip tts = new Tooltip("Change the voice");
+		Tooltip tts = new Tooltip("Change the robot's voice");
 		Tooltip repeat = new Tooltip("Say the word again");
 		Tooltip.install(voiceBtn,tts);
 		Tooltip.install(repeatBtn, repeat);

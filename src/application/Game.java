@@ -57,6 +57,7 @@ public class Game {
 	private int _incorrect;
 	
 	private String voiceType;
+	private MediaPlayer player;
 	
 	public Game(MainInterface app, StatisticsModel statsModel){
 		this(app,statsModel,1);
@@ -124,11 +125,11 @@ public class Game {
 	public void changeVoice(){
 		if(voiceType.equals("kal_diphone")){
 			voiceType = "akl_nz_jdt_diphone";
-			main.sayWord(SAY_SPEED_DEFAULT, voiceType, "Gidday");
+			main.sayWord(SAY_SPEED_DEFAULT, voiceType, "Hello, I am harry.");
 		}
 		else {
 			voiceType = "kal_diphone";
-			main.sayWord(SAY_SPEED_DEFAULT, voiceType, "Hello");
+			main.sayWord(SAY_SPEED_DEFAULT, voiceType, "Hello, I am rob.");
 		}
 	}
 	/**
@@ -228,17 +229,16 @@ public class Game {
 			}
 		}
 		if(!wordList.isEmpty()){
+			wordList = wordList.subList(0, (wordList.size()>=WORDS_NUM)?WORDS_NUM:wordList.size());
 			URL url = getClass().getClassLoader().getResource("src/resources/please_spell.mp3");
 			Media media = new Media(url.toString());
-			MediaPlayer player = new MediaPlayer(media); 
+			player = new MediaPlayer(media); 
 			player.play();
 			main.tell("wait", 0d);
 		    	
 		    	player.setOnEndOfMedia(new Runnable() {
 		            @Override public void run() {
 		            	main.sayWord(SAY_SPEED_DEFAULT,voiceType,wordList.get(0));
-		            	main.tell("resume", 0d);
-		            	player.dispose();
 		            }
 		          });
 		    	
@@ -348,14 +348,14 @@ public class Game {
 						url = getClass().getClassLoader().getResource("src/resources/yeehaw.mp3");
 					}
 					Media media = new Media(url.toString());
-					MediaPlayer player = new MediaPlayer(media); 
+					player = new MediaPlayer(media); 
 					player.play();
 					main.tell("wait", 0d);
 				    	
 				    	player.setOnEndOfMedia(new Runnable() {
 				            @Override public void run() {
 				            	main.sayWord(SAY_SPEED_DEFAULT,voiceType,wordList.get(0));
-				            	main.tell("resume", 0d);
+				            	
 				            	player.dispose();
 				            }
 				          });
@@ -380,7 +380,7 @@ public class Game {
 				gameEnded=true;
 				URL url = getClass().getClassLoader().getResource("src/resources/good_work.m4a");
 				Media media = new Media(url.toString());
-				MediaPlayer player = new MediaPlayer(media); 
+				player = new MediaPlayer(media); 
 		    	player.play();
 			}
 			//set progressbars for progress through quiz and also denote additional separation for faulted words
@@ -389,16 +389,4 @@ public class Game {
 	}
 	
 	
-
-	private void playRandomMusicReward() {
-		Random rand = new Random();
-		int n = rand.nextInt(2)+1;
-		URL url = getClass().getClassLoader().getResource("src/resources/woohoo.m4a");
-		if(n%2==1){
-			url = getClass().getClassLoader().getResource("src/resources/yay.m4a");
-		}
-		Media media = new Media(url.toString());
-		MediaPlayer player = new MediaPlayer(media); 
-    	player.play();
-	}
 }

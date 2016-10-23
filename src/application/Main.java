@@ -394,6 +394,7 @@ public class Main extends Application implements MainInterface {
 		private String[] _words;
 		private int _speed;
 		{
+			
 			try {
 				Process p = new ProcessBuilder("/bin/bash", "-c", "type -p festival").start();
 				BufferedReader isr = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -425,14 +426,13 @@ public class Main extends Application implements MainInterface {
 
 		@Override
 		protected Task<Integer> createTask() {
-			if(currentController.getClass().equals(QuizController.class)){
-				tell("wait", null);
-			}
+			
 			final String voice = _voice;
 			final String[] words = _words;
 			final int speed = _speed;
 			return new Task<Integer>() {
 				protected Integer call() throws Exception {
+					
 					BufferedWriter bw = new BufferedWriter(new PrintWriter(_pb.getOutputStream()));
 					for (int i = 0; i < words.length; i++) {
 						bw.write("(Parameter.set 'Duration_Stretch " + speed + ")");
@@ -441,6 +441,7 @@ public class Main extends Application implements MainInterface {
 					}
 					bw.flush();
 					return 0;
+					
 				}
 
 				public void succeeded() {
@@ -448,12 +449,13 @@ public class Main extends Application implements MainInterface {
 						if (!festivalTasks.isEmpty()&&get()==0) {
 							Task<Integer> task = festivalTasks.poll();
 							new Thread(task).start();
-							if(currentController.getClass().equals(QuizController.class)){
-								tell("resume", null);
-							}
+							
 						}
 					} catch (InterruptedException | ExecutionException e) {
 						e.printStackTrace();
+					}
+					if(currentController.getClass().equals(QuizController.class)){
+						tell("resume", 0d);
 					}
 				}
 			};
@@ -472,9 +474,12 @@ public class Main extends Application implements MainInterface {
 	 * @param words list of words to be said
 	 */
 	public void sayWord(final int speed, final String voiceType, final String... words) {
+		if(currentController.getClass().equals(QuizController.class)){
+			tell("wait", 0d);
+		}
 		festivalService.setVoice(voiceType);
 		festivalService.setWordsToList(speed, words);
-		if (!festivalTasks.isEmpty()) {
+		if (festivalTasks.isEmpty()) {
 			festivalTasks.add(festivalService.createTask());
 		}
 		Task<Integer> festivalTask = festivalService.createTask();
