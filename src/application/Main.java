@@ -71,6 +71,9 @@ public class Main extends Application implements MainInterface {
 	/*Hi there Morning Ryan, 
 	cheer up. we are almost there :)
 	
+	
+	DEAL WITH INCORRECT WORDLIST FORMAT
+	
 	s yesterday s need a help feature
 	
 	Get better exemplar wordlist?

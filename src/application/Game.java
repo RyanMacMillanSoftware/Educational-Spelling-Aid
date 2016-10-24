@@ -317,8 +317,6 @@ public class Game {
 				//faulted once => set faulted
 				main.tell("faultedWord",testWord);
 				speed = SAY_SPEED_SLOW;
-				//main.sayWord(speed,voiceType, testWord);
-				//main.sayWord(speed,voiceType, "The word is");
 			}else if(!faulted&&prevFaulted){
 				//correct after faulted => store faulted
 				main.tell("masteredWord",testWord);
@@ -329,8 +327,6 @@ public class Game {
 				//give one more chance in review, set speed to very slow
 				main.tell("lastChanceWord",testWord);
 				speed = SAY_SPEED_VERYSLOW;
-				//main.sayWord(speed,voiceType, testWord);
-				//main.sayWord(speed,voiceType, "The word is");
 			}else{
 				//faulted twice => failed
 				main.tell("failedWord",testWord);
