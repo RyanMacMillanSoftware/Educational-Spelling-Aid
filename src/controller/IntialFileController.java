@@ -39,8 +39,14 @@ public class IntialFileController extends SceneController {
 		try {
 			FileReader fi = new FileReader(newWordList);
 			BufferedReader br = new BufferedReader(fi);
-			String line = null;
-			if (!br.readLine().contains("%Level")) {
+			String line = br.readLine();
+			if (line == null){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText("This is not a valid wordlist!");
+				alert.showAndWait();
+				br.close();
+			}
+			else if (line.contains("%Level")) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setContentText("This is not a valid wordlist!");
 				alert.showAndWait();
