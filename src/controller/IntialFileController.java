@@ -45,10 +45,18 @@ public class IntialFileController extends SceneController{
 				currentwordlist = path.getParent()+"/"+filename;
 				application.setCurrentWordList(currentwordlist);
 				
+				File filee = new File (path.getParent()+"/src/.listpath.txt");
+				if (!filee.exists()){
+					filee.createNewFile();
+				}
+				FileWriter fw = new FileWriter(filee.getAbsoluteFile());
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(path.getParent()+"/"+filename+"\n");
+				bw.close();
 				
 				chosenListDisplay.setText(filename);
 
-			} catch (URISyntaxException e1) {
+			} catch (IOException | URISyntaxException e1) {
 				e1.printStackTrace();
 			}
 			confirmBtn.setDisable(false);
