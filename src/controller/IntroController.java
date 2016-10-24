@@ -38,6 +38,7 @@ public class IntroController extends SceneController {
 	public void submit(MouseEvent me){
 		unlockUpTo = levels.getSelectionModel().getSelectedItem().getLevel();
 		application.update(new ModelUpdateEvent(this,"unlockLevels"));
+		levels.getSelectionModel().clearSelection();
 	}
 	public int getLevelsToUnlock(){
 		return unlockUpTo;
