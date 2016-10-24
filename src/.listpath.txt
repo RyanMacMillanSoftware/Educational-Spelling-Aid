@@ -1,0 +1,1 @@
+/home/ryan/git/voxspell/NZCER-spelling-lists.txt
