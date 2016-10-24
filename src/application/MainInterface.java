@@ -25,8 +25,17 @@ public interface MainInterface {
 	 */
 	public void addStatsModel();
 	
+	/**
+	 * Check if a stats model is in use
+	 * @return true if there is
+	 */
 	public boolean hasStatsModel();
 	
+	/**
+	 * True if a stats model is already in the system
+	 * @param statsname
+	 * @return
+	 */
 	public boolean statsModelExists(String statsname);
 	
 	/**

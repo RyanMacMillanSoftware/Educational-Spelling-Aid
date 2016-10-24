@@ -41,9 +41,6 @@ public class StatsController extends SceneController{
 	 */
 	@FXML
 	public void initialize(){
-		//yAxis.setLabel("Percentage");
-		//yAxis.setUpperBound(100);
-		//yAxis.setLowerBound(0);
 		barChartView.getYAxis().setLabel("Percentage");
 		statsSelection.getItems().addAll("All Time Scores", "Latest Scores");
 		statsSelection.getSelectionModel().select(1);

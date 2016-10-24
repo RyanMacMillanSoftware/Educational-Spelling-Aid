@@ -34,26 +34,25 @@ public class StatisticsModel {
 	}
 
 	/**
-	 * Create new Statistics model linked to a main interface.
-	 * Stats are automatically saved upon exit.
-	 * If stats file is corrupted, throws RuntimeException
-	 * @param main Main interface
+	 * Create new Statistics model linked to a main interface. Stats are
+	 * automatically saved upon exit. If stats file is corrupted, throws
+	 * RuntimeException
+	 * 
+	 * @param main
+	 *            Main interface
 	 */
 	public StatisticsModel(MainInterface main) {
-		//initiate session stats and main interface
+		// initiate session stats and main interface
 		statsname = main.getStatsName();
 		sessionStats = new StoredStats();
 		application = main;
 		_isFirstTime = false;
-		//create new stats file if it does not exist
-		
-			try {
-				File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
-				File file = new File(path.getParent()+"/src/resources/"+ application.getStatsName());
-				if(!file.exists()){
-					
-				
-				
+		// create new stats file if it does not exist
+
+		try {
+			File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+			File file = new File(path.getParent() + "/src/resources/" + application.getStatsName());
+			if (!file.exists()) {
 				file.createNewFile();
 				FileOutputStream fo = new FileOutputStream(file);
 				ObjectOutputStream oos = new ObjectOutputStream(fo);
@@ -61,31 +60,27 @@ public class StatisticsModel {
 				oos.close();
 				fo.close();
 				_isFirstTime = true;
-				
-				}
-				
-				
-			}catch (IOException e) {
-				e.printStackTrace();
-			}catch (URISyntaxException e1) {
-				e1.printStackTrace();
 			}
-			
-		
-		//load global stats using the application model if possible
-		if(main!=null){
-			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e1) {
+			e1.printStackTrace();
+		}
+		// load global stats using the application model if possible
+		if (main != null) {
 			File path = null;
 			try {
 				path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
 			}
-			Object temp = application.loadObjectFromFile(path.getParent()+"/src/resources/" + application.getStatsName());
-			if(temp instanceof StoredStats){
-				globalStats = (StoredStats)temp;
-			}else{
-				Alert alert = new Alert(Alert.AlertType.INFORMATION, "Your stats file was corrupted or outdated.\nIt is now updated to a newer version");
+			Object temp = application
+					.loadObjectFromFile(path.getParent() + "/src/resources/" + application.getStatsName());
+			if (temp instanceof StoredStats) {
+				globalStats = (StoredStats) temp;
+			} else {
+				Alert alert = new Alert(Alert.AlertType.INFORMATION,
+						"Your stats file was corrupted or outdated.\nIt is now updated to a newer version");
 				alert.showAndWait();
 				globalStats = new StoredStats();
 				_isFirstTime = true;
@@ -113,7 +108,8 @@ public class StatisticsModel {
 		sessionStats.clearStats();
 		try {
 			File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
-			application.writeObjectToFile(path.getParent()+"/src/resources/" + application.getStatsName(), globalStats);
+			application.writeObjectToFile(path.getParent() + "/src/resources/" + application.getStatsName(),
+					globalStats);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}

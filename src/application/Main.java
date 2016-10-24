@@ -66,37 +66,8 @@ public class Main extends Application implements MainInterface {
 	private Queue<Task<Integer>> festivalTasks;
 	private FestivalService festivalService;
 	private static String currentWordList; 
-	//private String STATS_PATH;
-	
-	/*Hi there Morning Ryan, 
-	cheer up. we are almost there :)
 	
 	
-	DEAL WITH INCORRECT WORDLIST FORMAT
-	
-	s yesterday s need a help feature
-	
-	Get better exemplar wordlist?
-	
-	choose file "back to main menu" btn?
-	
-	pause/play video instead of stop
-	
-	add best score feature?
-	
-	make file and level chooser similar scenes to the others?
-	
-	change game win scene to recommend a new list
-	
-	*/
-	
-	public StatisticsModel getStatsModel(){
-		return statsModel;
-	}
-	
-	public static String getCurrentWordList(){
-		return currentWordList;
-	}
 	Stage _stage;
 	{
 		screens = new HashMap<String, Scene>();
@@ -109,7 +80,22 @@ public class Main extends Application implements MainInterface {
 	}
 	
 	/**
-	 * Add a stats model, representing a wordlist, to the list of stats models. change this after the wordlist
+	 * Get the current statistics model
+	 */
+	public StatisticsModel getStatsModel(){
+		return statsModel;
+	}
+	/**
+	 * Get the current wordlist
+	 * @return wordlist name
+	 */
+	public static String getCurrentWordList(){
+		return currentWordList;
+	}
+	
+	/**
+	 * Add a stats model, representing a wordlist, to the list 
+	 * of stats models. change this after the wordlist
 	 */
 	public void addStatsModel(){
 		boolean alreadyexists = false;
@@ -123,6 +109,9 @@ public class Main extends Application implements MainInterface {
 		}
 	}
 	
+	/**
+	 * Check if a stats model is already stored in the game
+	 */
 	public boolean statsModelExists(String statsname){
 		boolean alreadyexists = false;
 		for (StatisticsModel s : statsModels){
@@ -431,13 +420,11 @@ public class Main extends Application implements MainInterface {
 
 		@Override
 		protected Task<Integer> createTask() {
-			
 			final String voice = _voice;
 			final String[] words = _words;
 			final int speed = _speed;
 			return new Task<Integer>() {
 				protected Integer call() throws Exception {
-					
 					BufferedWriter bw = new BufferedWriter(new PrintWriter(_pb.getOutputStream()));
 					for (int i = 0; i < words.length; i++) {
 						bw.write("(Parameter.set 'Duration_Stretch " + speed + ")");
@@ -446,29 +433,21 @@ public class Main extends Application implements MainInterface {
 					}
 					bw.flush();
 					return 0;
-					
 				}
 
 				public void succeeded() {
-					
 					try {
 						if (!festivalTasks.isEmpty()&&get()==0) {
 							Task<Integer> task = festivalTasks.poll();
 							new Thread(task).start();
-							
 						}
 					} catch (InterruptedException | ExecutionException e) {
 						e.printStackTrace();
 					}
 					
-					
 				}
 			};
-		
-			
 		}
-		
-
 	}
 
 	/**
@@ -525,7 +504,9 @@ public class Main extends Application implements MainInterface {
 		currentWordList = path;
 	}
 
-	
+	/**
+	 * Get the current name of the stats file
+	 */
 	public String getStatsName() {
 		String[] getName = currentWordList.split("/");
 		String name = getName[getName.length-1];
@@ -533,6 +514,9 @@ public class Main extends Application implements MainInterface {
 		return "." + removeType[0] + ".ser";
 	}
 	
+	/**
+	 * Checks if there is a stats model currently implemented
+	 */
 	public boolean hasStatsModel(){
 		if(statsModel==null){
 			return false;

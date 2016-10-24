@@ -107,6 +107,7 @@ public class Game {
 	public List<String> wordList(){
 		return wordList;
 	}
+	
 	/**
 	 * Checks if game has ended
 	 * @return true/false
@@ -115,6 +116,8 @@ public class Game {
 	public boolean isGameEnded(){
 		return gameEnded;
 	}
+	
+
 	public boolean isReview(){
 		return review;
 	}
@@ -132,6 +135,7 @@ public class Game {
 			main.sayWord(SAY_SPEED_DEFAULT, voiceType, "Hello, I am rob.");
 		}
 	}
+	
 	/**
 	 * Returns voice type
 	 * @return voice string
@@ -140,6 +144,7 @@ public class Game {
 		final String voice = voiceType;
 		return voice;
 	}
+	
 	/**
 	 * Get current level.
 	 * @return level
@@ -147,6 +152,7 @@ public class Game {
 	public int level() {
 		return _level;
 	}
+	
 	/**
 	 * Gets word list from file system path
 	 * @return whether the word list has been successfully fetched to the wordList variable

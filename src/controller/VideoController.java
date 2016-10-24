@@ -25,11 +25,23 @@ public class VideoController extends SceneController {
 
 	private MediaPlayer mediaPlayer;
 	
+	/**
+	 * Implements the pause/play functionality
+	 * @param event
+	 */
 	@FXML
 	private void stopVideo(MouseEvent event) {
 		if(mediaPlayer==null)return;
-		mediaPlayer.stop();
+		if(stopButton.getText().equals("Pause")){
+			mediaPlayer.pause();
+			stopButton.setText("Play");
+		} else {
+			mediaPlayer.play();
+			stopButton.setText("Pause");
+		}
+		
 	}
+	
 	
 	private void killMediaPlayer(){
 		if(mediaPlayer==null)return;
@@ -82,6 +94,11 @@ public class VideoController extends SceneController {
 		}
 		
 	}
+	
+	/**
+	 * Sets up a video to play
+	 * @param arg
+	 */
 	public void setupPlayVideo(Object arg){
 		if(arg==null){System.err.println("can't find resource");return;}
 		Media media = (Media) arg;

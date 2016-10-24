@@ -6,6 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+/*A utility class that reads a wordlist and determines the number of levels that
+ * a user needs to be able to choose from.
+ */
+
 public final class ApplicationUtility {
 	public static int evaluateMaxLevelInFile(){
 		try{

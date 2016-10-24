@@ -31,7 +31,7 @@ public class IntroController extends SceneController {
 	@FXML
 	public void initialize(){}
 	/**
-	 * Submits levels
+	 * Submits levels and moves on to the next scene
 	 * @param me
 	 */
 	@FXML

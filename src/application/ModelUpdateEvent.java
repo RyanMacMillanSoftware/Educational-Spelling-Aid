@@ -269,6 +269,9 @@ public class ModelUpdateEvent {
 		}
 	}
 
+	/**
+	 * Called when the level chooser has been updated
+	 */
 	public void updateFromIntroController() {
 		IntroController ic = (IntroController) _sc;
 		switch (_message) {
@@ -290,13 +293,6 @@ public class ModelUpdateEvent {
 
 	}
 	
-	/*public void updateFromIntroFileController(){
-		switch (_message) {
-		case "onToLevels":
-				_main.requestSceneChange("firstTime");
-			break;
-		}
-	}*/
 
 	/**
 	 * Sets the game to the MainController's game

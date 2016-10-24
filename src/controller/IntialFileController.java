@@ -30,6 +30,13 @@ public class IntialFileController extends SceneController {
 	private Button confirmBtn;
 	private String currentwordlist;
 
+	/**
+	 * When the user clicks on the choose file button. This opens
+	 * the file chooser and loads their choice into the system.
+	 * It updates the systems state. It checks for invalid
+	 * wordlist inputs. 
+	 * @param event
+	 */
 	@FXML
 	public void openFileChooser(MouseEvent event) {
 		FileChooser fileChooser = new FileChooser();
@@ -50,11 +57,8 @@ public class IntialFileController extends SceneController {
 				br.close();
 			} else {
 				if (newWordList != null) {
-
 					String filename = newWordList.getName();
-
 					try {
-
 						File path = new File(
 								this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
 						currentwordlist = path.getParent() + "/" + filename;
@@ -68,26 +72,28 @@ public class IntialFileController extends SceneController {
 						BufferedWriter bw = new BufferedWriter(fw);
 						bw.write(path.getParent() + "/" + filename + "\n");
 						bw.close();
-
 						chosenListDisplay.setText(filename);
-
 					} catch (IOException | URISyntaxException e1) {
 						e1.printStackTrace();
 					}
 					confirmBtn.setDisable(false);
-
 				}
 
 			}
 		} catch (NumberFormatException | IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
+	/**
+	 * Confirms the users file choice. The logic checks whether to proceed to the 
+	 * main menu or level select depending on whether the file has already
+	 * been used or not.
+	 * @param event
+	 * @throws URISyntaxException
+	 */
 	@FXML
 	public void fileSelected(MouseEvent event) throws URISyntaxException {
-
 		boolean firsttime = true;
 		File path = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
 		File file = new File(path.getParent() + "/src/resources/" + application.getStatsName());
@@ -104,7 +110,6 @@ public class IntialFileController extends SceneController {
 
 			for (Integer i : application.getStatsModel().getGlobalStats().getUnlockedLevelSet()) {
 				application.getStatsModel().getSessionStats().unlockLevel(i);
-				// application.getStatsModel().getGlobalStats().unlockLevel(i);
 			}
 		}
 	}
